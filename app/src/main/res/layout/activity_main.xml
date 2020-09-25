@@ -9,27 +9,28 @@
     android:orientation="vertical"
     >
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/text_product"
-        android:hint="Nome do produto"
-        />
-
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Inserir"
-        android:id="@+id/btn_insert"
+        android:text="Add Items"
+        android:id="@+id/add_button"
         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TOTAL: 0.00"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:id="@+id/total_text"
+        />
+
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/items_list"
         />
-
-    
-
 
 </LinearLayout>

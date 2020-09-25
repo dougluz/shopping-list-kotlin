@@ -1,9 +1,8 @@
 package com.douglasluz.listadecompras
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -16,21 +15,15 @@ class MainActivity : AppCompatActivity() {
 
         items_list.adapter = productsAdapter
 
-        btn_insert.setOnClickListener{
-            val product = text_product.text.toString()
-
-            if (product.isNotEmpty()) {
-                productsAdapter.add(product)
-                text_product.text.clear()
-            } else {
-                text_product.error = "Please type something"
-            }
-        }
-
-        items_list.setOnItemLongClickListener { _, view: View?, position: Int, id: Long ->
+        items_list.setOnItemLongClickListener { _, _, position: Int, _ ->
             val item = productsAdapter.getItem(position)
             productsAdapter.remove(item)
             true
+        }
+
+        add_button.setOnClickListener {
+            val intent = Intent(this, ProductRegisterActivity::class.java)
+            startActivity(intent)
         }
     }
 }

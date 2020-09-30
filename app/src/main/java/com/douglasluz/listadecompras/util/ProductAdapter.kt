@@ -18,13 +18,15 @@ class ProductAdapter(context: Context): ArrayAdapter<Product>(context, 0) {
         val numberFormat = NumberFormat.getCurrencyInstance(Locale("pt", "br"))
         val item = getItem(position)
 
-        val productName = view.findViewById<TextView>(R.id.product_item)
-        val productQuantity = view.findViewById<TextView>(R.id.product_quantity)
-        val productPrice = view.findViewById<TextView>(R.id.product_price)
-        val productPhoto = view.findViewById<ImageView>(R.id.product_photo)
+        val productName = view.findViewById<TextView>(R.id.text_item_name)
+        val productQuantity = view.findViewById<TextView>(R.id.text_item_quantity)
+        val productPrice = view.findViewById<TextView>(R.id.text_item_value)
+        val productPhoto = view.findViewById<ImageView>(R.id.list_product_image)
 
         productName.text = item?.name
-        productQuantity.text = item?.quantity.toString()
+        if (item != null) {
+            productQuantity.text = item.quantity.toString()
+        }
         productPrice.text = numberFormat.format(item?.price)
         productPhoto.setImageBitmap(item?.image)
 

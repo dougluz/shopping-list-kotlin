@@ -3,12 +3,12 @@ package com.douglasluz.listadecompras
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import com.douglasluz.listadecompras.repository.productsRepository
 import com.douglasluz.listadecompras.util.ProductAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.NumberFormat
 import java.util.*
+import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,8 +27,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         add_button.setOnClickListener {
-            val intent = Intent(this, ProductRegisterActivity::class.java)
-            startActivity(intent)
+            startActivity<ProductRegisterActivity>()
         }
     }
 

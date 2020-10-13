@@ -2,13 +2,16 @@ package com.douglasluz.listadecompras
 
 import android.app.Activity
 import android.content.Intent
+import android.database.sqlite.SQLiteDatabase
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.douglasluz.listadecompras.models.Product
-import com.douglasluz.listadecompras.repository.productsRepository
+import org.jetbrains.anko.db.insert
+import com.douglasluz.listadecompras.repository.ProductsRepository
+import com.douglasluz.listadecompras.repository.database
 import kotlinx.android.synthetic.main.activity_product_register.*
+import org.jetbrains.anko.toast
 
 class ProductRegisterActivity : AppCompatActivity() {
     private val COD_IMAGE = 101
@@ -27,8 +30,20 @@ class ProductRegisterActivity : AppCompatActivity() {
             val productPrice = product_price.text.toString()
 
             if (productName.isNotEmpty() && productQuantity.isNotEmpty() && productPrice.isNotEmpty()) {
-                val product = Product(productName, productQuantity.toInt(), productPrice.toDouble(), imageBitmap)
-                productsRepository.add(product)
+                database.use {
+                    val productId = insert("products",
+                        "name" to productName,
+                        "quantity" to productQuantity,
+                        "price" to productPrice,
+                        "image" to imageBitmap
+                        )
+
+                    if (productId != -1L) {
+                        toast("Product inserted")
+                    } else {
+                        toast("Error")
+                    }
+                }
                 product_text.text.clear()
                 product_price.text.clear()
                 product_quantity.text.clear()

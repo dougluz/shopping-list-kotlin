@@ -10,6 +10,7 @@ import android.os.Bundle
 import org.jetbrains.anko.db.insert
 import com.douglasluz.listadecompras.repository.ProductsRepository
 import com.douglasluz.listadecompras.repository.database
+import com.douglasluz.listadecompras.util.toByteArray
 import kotlinx.android.synthetic.main.activity_product_register.*
 import org.jetbrains.anko.toast
 
@@ -35,7 +36,7 @@ class ProductRegisterActivity : AppCompatActivity() {
                         "name" to productName,
                         "quantity" to productQuantity,
                         "price" to productPrice,
-                        "image" to imageBitmap
+                        "image" to imageBitmap?.toByteArray()
                         )
 
                     if (productId != -1L) {
